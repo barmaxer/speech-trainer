@@ -17,28 +17,7 @@ export const SYSTEM_PROMPT = `
 Вы должны вернуть ТОЛЬКО JSON-объект с детальной аналитикой.
 `;
 
-// JSON schema для ответа модели (не используется на клиенте - анализ на сервере)
-/*
-export const JSON_SCHEMA: JSONSchema = {
-  type: "OBJECT",
-  properties: {
-    "score": { type: "NUMBER", description: "Общая оценка 0-100" },
-    "metrics": {
-      type: "OBJECT",
-      properties: {
-        "pace": { type: "NUMBER", description: "Темп в словах/минуту" },
-        "fillerWords": { type: "NUMBER", description: "Количество слов-паразитов" },
-        "clarity": { type: "NUMBER", description: "Четкость 0-100" },
-        "vocabulary": { type: "NUMBER", description: "Разнообразие словаря 0-100" }
-      }
-    },
-    "analysis": { type: "STRING", description: "Краткий анализ 2-3 предложения" },
-    "strengths": { type: "ARRAY", items: { type: "STRING" }, description: "2 сильные стороны" },
-    "improvements": { type: "ARRAY", items: { type: "STRING" }, description: "2 области для улучшения" }
-  },
-  required: ["score", "metrics", "analysis", "strengths", "improvements"]
-};
-*/
+// JSON schema теперь используется только на сервере в api/analyze.ts
 
 // Упражнения для практики
 export const EXERCISES: Exercise[] = [
