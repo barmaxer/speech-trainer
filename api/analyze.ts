@@ -5,12 +5,12 @@ export default async function handler(req: Request): Promise<Response> {
     if (!transcript || String(transcript).trim().length < 10) {
       return new Response(JSON.stringify({ error: "short_input" }), { status: 400, headers: { "Content-Type": "application/json" }});
     }
-    const apiKey = process.env.GEMINI_API_KEY;
-    if (!apiKey) {
+    const key = process.env.GEMINI_API_KEY;
+    if (!key) {
       return new Response(JSON.stringify({ error: "no_api_key" }), { status: 500, headers: { "Content-Type": "application/json" }});
     }
 
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${key}`;
     const payload = {
       systemInstruction: { parts: [{ text: String(prompt || "") }] },
       contents: [{ parts: [{ text: String(transcript) }]}],
@@ -24,15 +24,11 @@ export default async function handler(req: Request): Promise<Response> {
       return new Response(JSON.stringify({ error: "upstream_error", status: r.status, details: data }), { status: r.status, headers: { "Content-Type": "application/json" }});
     }
 
-    const text = (data?.candidates?.[0]?.content?.parts || [])
-      .map((p: any) => p?.text ?? "")
-      .join("\n")
-      .trim()
-      .replace(/^```[a-zA-Z]*\s*/i, "")
-      .replace(/```$/, "");
+    const txt = (data?.candidates?.[0]?.content?.parts || []).map((p: any) => p?.text ?? "").join("\n")
+      .trim().replace(/^```[a-zA-Z]*\s*/i, "").replace(/```$/, "");
 
     let parsed: any;
-    try { parsed = JSON.parse(text); }
+    try { parsed = JSON.parse(txt); }
     catch {
       parsed = { score: 0, analysis: "Модель вернула неожиданный формат.", strengths: [], improvements: ["Повторите анализ"], metrics: { pace: 0, fillerWords: 0, clarity: 0, vocabulary: 0 } };
     }
