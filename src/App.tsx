@@ -29,7 +29,7 @@ import AnalysisResult from './components/AnalysisResult';
 import HistoryView from './components/HistoryView';
 import Sparkline from './components/Sparkline';
 import { EXERCISES, SYSTEM_PROMPT, JSON_SCHEMA } from './constants';
-import { fetchWithBackoff, formatTime } from './utils';
+import { formatTime, normalizeAnalysis } from './utils';
 import type { AnalysisResult as AnalysisResultType, HistoryItem } from './types';
 
 const Spinner = () => (
