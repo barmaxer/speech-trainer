@@ -36,6 +36,8 @@ export interface Exercise {
   color: string;
 }
 
+// JSON Schema interface - not used on client (analysis moved to server)
+/*
 export interface JSONSchema {
   type: string;
   properties: {
@@ -53,3 +55,4 @@ export interface JSONSchema {
   };
   required: string[];
 }
+*/

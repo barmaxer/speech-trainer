@@ -28,7 +28,7 @@ import {
 import AnalysisResult from './components/AnalysisResult';
 import HistoryView from './components/HistoryView';
 import Sparkline from './components/Sparkline';
-import { EXERCISES, SYSTEM_PROMPT, JSON_SCHEMA } from './constants';
+import { EXERCISES, SYSTEM_PROMPT } from './constants';
 import { formatTime, normalizeAnalysis } from './utils';
 import type { AnalysisResult as AnalysisResultType, HistoryItem } from './types';
 

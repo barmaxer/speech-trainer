@@ -1,5 +1,6 @@
 import { Target, Zap, MessageSquare, Sparkles } from 'lucide-react';
-import type { Exercise, JSONSchema } from './types';
+// import type { Exercise, JSONSchema } from './types';
+import type { Exercise } from './types';
 
 // Системная инструкция для AI
 export const SYSTEM_PROMPT = `
@@ -16,7 +17,8 @@ export const SYSTEM_PROMPT = `
 Вы должны вернуть ТОЛЬКО JSON-объект с детальной аналитикой.
 `;
 
-// Схема JSON для структурированного ответа
+// JSON schema для ответа модели (не используется на клиенте - анализ на сервере)
+/*
 export const JSON_SCHEMA: JSONSchema = {
   type: "OBJECT",
   properties: {
@@ -36,6 +38,7 @@ export const JSON_SCHEMA: JSONSchema = {
   },
   required: ["score", "metrics", "analysis", "strengths", "improvements"]
 };
+*/
 
 // Упражнения для практики
 export const EXERCISES: Exercise[] = [
