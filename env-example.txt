@@ -7,5 +7,5 @@ VITE_INITIAL_AUTH_TOKEN=
 # App ID
 VITE_APP_ID=default-app-id
 
-# Google Gemini API Key
-VITE_GEMINI_API_KEY=AIzaSyBlbUFBcBiQD6fv86mHCsed4_x8Xjn-xqE
+# Google Gemini API Key (server-side only)
+GEMINI_API_KEY=your-gemini-api-key-here

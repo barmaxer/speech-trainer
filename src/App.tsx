@@ -308,37 +308,19 @@ export default function App() {
     setStatus('processing');
     setError(null);
 
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY || "";
-    // Обновленная модель Gemini
-    const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-
-    const payload = {
-      contents: [{ parts: [{ text: `Проанализируй эту речь:\n\n"${speechText}"` }] }],
-      systemInstruction: { parts: [{ text: SYSTEM_PROMPT }] },
-      generationConfig: {
-        responseMimeType: "application/json",
-        responseSchema: JSON_SCHEMA,
-      }
-    };
-
     try {
-      const result = await fetchWithBackoff(API_URL, {
+      const resp = await fetch('/api/analyze', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ prompt: SYSTEM_PROMPT, transcript: speechText })
       });
-
-      const candidate = result.candidates?.[0];
-      if (candidate && candidate.content?.parts?.[0]?.text) {
-        const parsedResult: AnalysisResultType = JSON.parse(candidate.content.parts[0].text);
-        setAnalysisResult(parsedResult);
-        setStatus('idle');
-        setRecordingTime(0);                // ← теперь обнуляем
-        setView('result');
-        persistResultOnce(parsedResult);   // автосохранение сразу после анализа
-      } else {
-        throw new Error("Не удалось получить анализ от AI.");
-      }
+      if (!resp.ok) throw new Error(`analyze ${resp.status}`);
+      const parsed = await resp.json();
+      setAnalysisResult(normalizeAnalysis(parsed));
+      setStatus('idle');
+      setRecordingTime(0);                // ← теперь обнуляем
+      setView('result');
+      persistResultOnce(parsed);   // автосохранение сразу после анализа
     } catch (err: any) {
       console.error("Ошибка анализа:", err);
       setError(`Ошибка анализа: ${err.message}`);
