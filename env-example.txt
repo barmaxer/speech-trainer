@@ -1,0 +1,11 @@
+# Firebase Configuration
+VITE_FIREBASE_CONFIG={"apiKey":"your-api-key","authDomain":"your-project.firebaseapp.com","projectId":"your-project-id","storageBucket":"your-project.appspot.com","messagingSenderId":"123456789","appId":"your-app-id"}
+
+# Authentication Token (optional)
+VITE_INITIAL_AUTH_TOKEN=
+
+# App ID
+VITE_APP_ID=default-app-id
+
+# Google Gemini API Key
+VITE_GEMINI_API_KEY=AIzaSyBlbUFBcBiQD6fv86mHCsed4_x8Xjn-xqE
