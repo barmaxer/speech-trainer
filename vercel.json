@@ -1,7 +1,5 @@
 {
-  "functions": {
-    "api/analyze.ts": {
-      "runtime": "@vercel/node"
-    }
-  }
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }
