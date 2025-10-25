@@ -22,7 +22,7 @@ React приложение для тренировки навыков публи
 
 1. Клонируйте репозиторий:
 ```bash
-git clone <repository-url>
+git clone https://github.com/barmaxer/speech-trainer.git
 cd speech-trainer
 ```
 
